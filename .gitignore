@@ -1,0 +1,12 @@
+.ninja_*
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.log
+*.nav
+*.run.xml
+*.snm
+*.toc
+result
+slides.tex

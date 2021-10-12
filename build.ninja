@@ -1,0 +1,13 @@
+rule pandoc_beamer
+    command = pandoc -st beamer $in -o $out
+
+rule compile_latex
+    command = pdflatex slides.tex && biber slides && pdflatex slides.tex
+
+rule fig_asy_to_pdf
+    command = (cd fig && asy -f pdf ../$in)
+
+build fig/triangle.pdf: fig_asy_to_pdf fig/triangle.asy
+
+build slides.tex: pandoc_beamer slides.md
+build slides.pdf slides.aux slides.bbl slides.bcf slides.blg slides.log slides.nav slides.run.xml slides.snm slides.toc: compile_latex slides.tex | biblio.bib fig/triangle.pdf
